@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+   
+    <link rel="stylesheet" href="css/Estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <header class="header">
+		<div class="container">
+	
+			<div class="logo">
+				<h1>Programas</h1>
+			</div>
+			<nav class="menu">
+				<a href="#">Inicio</a>
+				<a href="#">Nosotros</a>
+				<a href="#">Blog</a>
+				<a href="#">Contacto</a>
+			</nav>
+		</div>
+	</header>
+    <section id="seccion">
+        <article id="article_vue" class="formulario">
+            <h4>¿Te gusta el Futbol?</h4>
+            <input type="radio" name="preg_1" v-model="preg_1" value="Si" @click="validar_preg1()">Si
+            <input type="radio" name="preg_1" v-model="preg_1" value="No" @click="validar_preg1()">No
+            <span v-show="pregunta1">
+                <h4>¿Cuántos años llevas  jugando Futbol?</h4>
+                <input type="text" v-model.number="anios_prog" @keyup="validaranios()" @keydown="validaranios()" />
+            </span>
+            <span v-if="pregunta2">
+                <h4>¿Qué te motiva a Jugar ?</h4>
+                <input type="text-area" v-model="motv_prog">
+            </span>
+            <span v-if="pregunta3">
+                <h4>Cuentanos tu experiencia jugando este deporte</h4>
+                <input type="text-area" v-model="exp_prog">
+                <h4>¿Que equipos te gustan ? </h4>
+                <input type="text" v-model="lng_prog" @keyup.enter="agregar_Lng()"/>
+                <button @click="agregar_Lng()">Agregar equipo</button>
+                <ul>
+                    <li v-for="(lng,index) in lngs_prog":key="index">{{lng}}</li>
+                </ul>
+            </span>
+            <span v-if="pregunta0">
+                <h4>Gracias por Apoyar</h4>
+            </span>
+            <p><button @click="resultados()">Mostrar Resultados</button></p>
+            <span v-if="resultados_block1">
+                <p>¿Te gusta el Futbol?: </p>
+                <p style="color: brown;"> {{preg_1}}</p>
+                <p>¿Cuántos años llevas  jugando Futbol?: </p>
+                <p style="color: brown;">{{anios_prog}} </p>
+            </span>
+            <span v-if="resultados_block2">
+                <p>¿Qué te motiva a Jugar ?: </p>
+                <p style="color: brown;">{{motv_prog}}</p>
+            </span>
+            <span v-if="resultados_block3">
+                <p>Cuentanos tu experiencia jugando este deporte: </p>
+                <p style="color: brown;">{{exp_prog}} </p>
+                <p>¿Que equipos te gustan ?:</p>
+                <p><ul>
+                    <li v-for="(lng,index) in lngs_prog":key="index"  style="color: brown;">{{lng}}</li>
+                   
+                </ul></p>
+            </span>
+        </article>    
+    </section>
+    <script src="js/encuesta.js"></script>
+</body>
+</html>
